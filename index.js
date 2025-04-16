@@ -39,7 +39,6 @@ app.post("/submit", (req, res) => {
 });
 
 app.get("/qr", (req, res) => {
-	// Assuming you've already processed the image and saved it
 	const qrPath = path.join(__dirname, "/qr.html");
 	res.sendFile(qrPath);
 });

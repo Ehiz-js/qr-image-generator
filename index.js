@@ -38,6 +38,7 @@ app.post("/submit", (req, res) => {
 	});
 });
 
+//RENDER THE QR DISPLAY PAGE
 app.get("/qr", (req, res) => {
 	const qrPath = path.join(__dirname, "/qr.html");
 	res.sendFile(qrPath);

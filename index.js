@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
 //get user input
 app.post("/submit", (req, res) => {
 	userInput = req.body.website;
+	//console.log for testing
 	console.log(userInput);
 	//GENERATE AND SAVE QR IMAGE
 	let qr_img = qr.image(`https://${userInput}.com`, { type: "png" });

@@ -32,6 +32,7 @@ app.post("/submit", (req, res) => {
 	qr_img.pipe(
 		fs.createWriteStream(path.join(__dirname, "public", "qr_img.png"))
 	);
+	//go to next page
 	qr_img.on("end", () => {
 		res.redirect("/qr");
 	});

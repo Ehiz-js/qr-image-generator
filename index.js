@@ -1,0 +1,49 @@
+//IMPORT PACKAGES
+import express from "express";
+import qr from "qr-image";
+import bodyParser from "body-parser";
+import fs from "fs";
+import path from "path";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+
+//GLOBAL VARIABLES
+const app = express();
+const port = 3000;
+const __dirname = dirname(fileURLToPath(import.meta.url));
+let userInput;
+
+//MIDDLEWARE
+app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+//ROUTES
+//display main page
+app.get("/", (req, res) => {
+	res.sendFile(__dirname + "/public/index.html");
+});
+
+//get user input
+app.post("/submit", (req, res) => {
+	userInput = req.body.website;
+	console.log(userInput);
+	//GENERATE AND SAVE QR IMAGE
+	let qr_img = qr.image(`https://${userInput}.com`, { type: "png" });
+	qr_img.pipe(
+		fs.createWriteStream(path.join(__dirname, "public", "qr_img.png"))
+	);
+	qr_img.on("end", () => {
+		res.redirect("/qr");
+	});
+});
+
+app.get("/qr", (req, res) => {
+	// Assuming you've already processed the image and saved it
+	const qrPath = path.join(__dirname, "/qr.html");
+	res.sendFile(qrPath);
+});
+
+//INITIALIZE SERVER
+app.listen(port, () => {
+	console.log(`Listening on port ${port}`);
+});

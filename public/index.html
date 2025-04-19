@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>QR Code Generator</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<h1>QR CODE GENERATOR</h1>
+
+		<form id="input-form" action="/submit" method="POST">
+			<div id="label"><label for="website">Website Name:</label></div>
+			<div id="input">
+				<input type="text" name="website" required placeholder="facebook" />
+			</div>
+			<div id="button"><input type="submit" value="Submit" /></div>
+		</form>
+
+		<script src="../index.js"></script>
+	</body>
+</html>
